@@ -47,6 +47,26 @@ HTML::cabeceras(array(
 // Guardo el bufer para colocarlo en el layout
 ob_start();
 
+echo '<p style="text-align:center"><font color="#6600CC">AppTareas</font></p>';
+echo "<HR>";
+
+  // Tabla con instancias
+  $cols = array('*','-id','acción'=>'<a class="borrar" href="?id=@[id]">Borrar</a>');
+  $join = array('depende'=>$liga);
+  $pie  = '<th colspan="@[numCols]">Total de instancias: <span id="numReg">@[numReg]</span> </th>';
+  echo "\n";
+  echo '<form id="lista-form">';
+  echo "\n";
+  HTML::tabla($liga, 'Instancias de '.$tabla, $cols, true, $join,$pie);
+  echo "</form>\n";
+  echo "<br>\n\n";
+	 
+  $cont = ob_get_clean();
+ 
+
+// Estuctura el cuerpo de la página
+HTML::cuerpo(array('cont'=>$cont));
+
 $campos = array('*');
   
 echo "<br>\n\n";
@@ -71,32 +91,17 @@ HTML::forma($liga, 'Modificar '.$tabla, $campos, $props, true);
   
 $cont = ob_get_clean();
 
-
-
-  // Tabla con instancias
-  $cols = array('*','-id','acción'=>'<a class="borrar" href="?id=@[id]">Borrar</a>');
-  $join = array('depende'=>$liga);
-  $pie  = '<th colspan="@[numCols]">Total de instancias: <span id="numReg">@[numReg]</span> </th>';
-  echo "\n";
-  echo '<form id="lista-form">';
-  echo "\n";
-  HTML::tabla($liga, 'Instancias de '.$tabla, $cols, true, $join,$pie);
-  echo "</form>\n";
-  echo "<br>\n\n";
-	 
-  $cont = ob_get_clean();
-
-
-
-// Estuctura el cuerpo de la página
+//Estuctura el cuerpo de la página
 HTML::cuerpo(array('cont'=>$cont));
+
 ?>
+<br>
 <script
   src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
-  crossorigin="anonymous"></script>
-<script src="App.js">
-</script>
+  crossorigin="anonymous"> 	
+</script>  	
+<script src="App2.js"></script>
 <?php
 // Cierre de etiquetas HTML
 HTML::pie();
